@@ -29,4 +29,12 @@ public class CarServiceImpl implements CarService {
         }
         return cars.subList(0, count);
     }
+
+    public List<Car> getCarsForModel(Integer count) {
+        if (count == null || count >= cars.size()) {
+            return getAllCars();
+        } else {
+            return getCars(count);
+        }
+    }
 }

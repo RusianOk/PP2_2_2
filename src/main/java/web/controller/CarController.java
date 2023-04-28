@@ -14,16 +14,15 @@ import web.service.CarServiceImpl;
 @RequestMapping("/cars")
 public class CarController {
 
-    @Autowired
     private CarServiceImpl carServiceImpl;
+
+    public CarController(CarServiceImpl carServiceImpl) {
+        this.carServiceImpl = carServiceImpl;
+    }
 
     @GetMapping
     public String getCars(@RequestParam(required = false) Integer count, Model model) {
-        if (count == null || count >= carServiceImpl.getAllCars().size()) {
-            model.addAttribute("cars", carServiceImpl.getAllCars());
-        } else {
-            model.addAttribute("cars", carServiceImpl.getCars(count));
-        }
+        model.addAttribute("cars", carServiceImpl.getCarsForModel(count));
         return "cars";
     }
 }
